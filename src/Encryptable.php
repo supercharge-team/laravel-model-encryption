@@ -5,17 +5,17 @@ trait Encryptable
 
     public $aesKey = null;
     public static $enableEncryption = true;
-    private $encrypter;
+    private $modelEncrypter;
 
     /**
      * @return Encrypter
      */
-    public function encrypter()
+    public function modelEncrypter()
     {
-        if(! $this->encrypter){
-            $this->encrypter = new Encrypter();
+        if(! $this->modelEncrypter){
+            $this->modelEncrypter = new Encrypter();
         }
-        return $this->encrypter;
+        return $this->modelEncrypter;
     }
 
     /**
@@ -57,7 +57,7 @@ trait Encryptable
      */
     public function decryptAttribute($value)
     {
-       return $value ? $this->encrypter()->decrypt($value) : '';
+       return $value ? $this->modelEncrypter()->decrypt($value) : '';
     }
 
     /**
@@ -76,7 +76,7 @@ trait Encryptable
      */
     public function encryptAttribute($value)
     {
-        return $value ? $this->encrypter()->encrypt(strtolower($value)) : '';
+        return $value ? $this->modelEncrypter()->encrypt(strtolower($value)) : '';
     }
 
     /**
